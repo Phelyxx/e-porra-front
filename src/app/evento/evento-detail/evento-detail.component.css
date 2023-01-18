@@ -1,0 +1,46 @@
+body {  
+    background: #f6f8fa;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    justify-items: left;
+  }
+  details { 
+    width: 100%;
+    margin-bottom: 1rem;
+    border: none;
+    color: #364f6b;
+    position: relative;  
+  }
+  details summary {  
+    font-weight: 400;
+    font-size: 1.25rem;
+    padding-bottom: 1rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  
+  details:hover,
+  details[open] {
+    box-shadow: 5px 5px 15px #d9d9d9;
+  }
+  
+  details[open] {
+    background: #ffffff;
+  }
+  
+  details[open] summary {
+    font-weight: 600;
+  }
+  
+  details summary::before {
+    position: absolute;
+      content: '\25BC';    
+      font-size: 1.75rem;
+      right: 16px;  
+  }
+  
+  details[open] summary::before {
+    position: absolute;
+      content: '\25B2';    
+      font-size: 1.75rem;
+  }

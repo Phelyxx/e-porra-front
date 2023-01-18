@@ -1,0 +1,85 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <label class="fs-4 fw-bold">{{evento?.nombre}}</label>
+      <button [disabled]="!evento?.abierto || evento?.apuestas.length > 0" *ngIf="evento && usuarioAdmin==true" type="button" class="btn btn-outline-success ms-3 me-2"
+        (click)="goToEdit()" title="Editar evento"><i class="bi bi-pencil-square"></i></button>
+      <button [disabled]="!evento?.abierto || evento?.apuestas.length > 0" *ngIf="evento && usuarioAdmin==true" type="button" class="btn btn-outline-danger me-1"
+        (click)="eliminarEvento()" title="Eliminar evento"><i class="bi bi-trash"></i></button>
+      <button *ngIf="evento?.abierto == true && evento?.apuestas.length > 0" type="button"
+        class="btn btn-outline-success ms-1 me-2" (click)="terminarEvento()" title="Terminar evento"><i
+          class="bi bi-flag-fill"></i></button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-hover table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" class="text-center">Tipo de evento</th>
+            <th scope="col" class="text-center">Deporte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{evento?.tipo.llave}}</td>
+            <td>{{evento?.deporte}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <details>
+      <summary class="col-12 mt-3 mb-2 ms-2">
+        <h5>Competidores</h5>
+      </summary>
+      <div class="col-12">
+        <table class="table table-hover table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" class="text-center">Competidor</th>
+              <th scope="col" class="text-center">Probabilidad de ganar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let competidor of evento?.competidores" (click)="goToEdit()">
+              <td>{{competidor.nombre_competidor}}</td>
+              <td class="text-center">{{competidor.probabilidad | number:'1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    
+  </div>
+
+  <div *ngIf="evento?.apuestas.length > 0" class="row">
+    <div class="col-12 mt-3 mb-2 ms-2">
+      <h5>Apuestas</h5>
+    </div>
+    <div class="col-12">
+      <table class="table table-hover table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" class="text-center">Apostador</th>
+            <th scope="col" class="text-center">Competidor</th>
+            <th scope="col" class="text-center">Valor apostado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let apuesta of evento?.apuestas">
+            <td>{{apuesta.nombre_apostador}}</td>
+            <td class="text-center">{{ getCompetidor(apuesta.id_competidor) }}</td>
+            <td class="text-center">{{apuesta.valor_apostado | number:'1.2-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
